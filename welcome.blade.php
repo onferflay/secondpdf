@@ -394,6 +394,13 @@
           $(".optdiv").hide(); 
         } 
       }
+
+        if(n>1){
+          $(".optmenu li:nth-child(2)").css({'cursor':"not-allowed", "color":"#b0c1d4"});
+        }
+        else{
+          $(".optmenu li:nth-child(2)").css({'cursor':"pointer","color":"#00b0f0"});
+        }
           });
 
 
@@ -403,7 +410,6 @@
         $("input[type=checkbox]").prop('checked', true);
         $("input[type=checkbox]").parents("tr").css("background-color","pink"); 
         $(".optdiv").show(); 
-        // n = $("input:checked").length-1;
         n = $(".admintable td input:checked").length
         $(".optdiv>span").text( n + (n>1 ? " items" : " item") + " selected!" );     
       }
@@ -413,6 +419,13 @@
         $("input[type=checkbox]").parents("tr").css("background-color","white");
         $(".optdiv").hide();   
       }
+      n = $(".admintable td input:checked").length
+        if(n>1){
+          $(".optmenu li:nth-child(2)").css({'cursor':"not-allowed", "color":"#b0c1d4"});
+        }
+        else{
+          $(".optmenu li:nth-child(2)").css({'cursor':"pointer","color":"#00b0f0"});
+        }
           });
  $(".viewcockpit").click(function(){
   $(this).siblings("ul").toggle();
@@ -425,6 +438,20 @@
     </head>
     <body>
     <div style="width: 100%; height: 150px; background-color: blue; position: relative;" id="headerdiv"></div>
+    <div style="display:flex; flex-direction: column-reverse;">
+                 <div style='border-top: #464646 1px solid; padding-top: 12px; background-color:#333; display: flex;'>
+           <div class='container'>
+            <ul style='float:right;font-size: 11px; line-height: 16px; padding-top: 8px; color: #c2c2c2; list-style:none;'>
+                   <li style='display:inline'><a href='http://www.energymarketprice.com/?act=Contacts' style='color:#c2c2c2;'>Contact</a>&nbsp;&nbsp;|&nbsp;</li>
+                   <li style='display:inline'><a href='disclaimer.pdf' style='color:#c2c2c2;'>Disclaimer</a>&nbsp;&nbsp;|&nbsp;</li>
+                   <li style='display:inline'><a href='TERMSandCONDITIONS.pdf' style='color:#c2c2c2;'>Terms&Conditions</a>&nbsp;&nbsp;|&nbsp;</li>
+                   <li style='display:inline'><a href='Privacy_Policy.pdf' style='color:#c2c2c2;'>Privacy Policy</a></li>
+               </ul>"
+               <a href='https://twitter.com/energymrktprice'><img src='media/images/tw.png' alt='' /></a>
+               <a href='https://www.linkedin.com/company/energymarketprice'><img src='media/images/in.png' alt='' /></a>
+               <a href='/'><img class='logo' src='media/images/logo-footer.png' alt='' /></a>
+           </div>
+       </div>
     <div class="maindiv">
 <ul class="navmenu">
         <li><a href="#" class="ddlink"><i class="fa fa-user-o fa-lg"></i> MY ACCOUNT</a><span class="ddspan" rel="1" ><i class="fa fa-angle-right fa-lg"></i><i class="fa fa-angle-down fa-lg" style="display:none"></i></span><div class="border-bar"></div></li>
@@ -572,6 +599,6 @@
 </ul>
 </div>
       </div>
-    </div>
+      </div>
     </body>
 </html>

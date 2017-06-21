@@ -97,7 +97,7 @@
 
 
     	.switch{
-		width: 80px;
+		width: 70px;
 		height: 26px;
 		top:13px;
 		left:10px;
@@ -109,13 +109,13 @@
 	}
 	.sw{
 		position: absolute;
-		background-color: red;
+		background-color:#B0C1D4;
 		top:0;
 		bottom: 0;
 		right: 0;
 		left: 0;
 		transition: .5s;
-		border-radius: 20px;
+		border-radius: 4px;
 	}
 	.sw:before{
 		position: absolute;
@@ -124,31 +124,43 @@
 		content: "";
 		left:2px;
 		bottom: 2px;
-		background-color: white;
+		background-color: #f1f1f1;
 		transition: 0.5s;
-		border-radius: 10px;
+		border-radius: 2px;
 	}
 
 	.switch input:checked + .sw{
-		background-color: green;
+		background-color: #27ae60;
 	}
 
 	.switch input:checked + .sw:before{
-		transform: translateX(46px);
+		transform: translateX(36px);
 	}
 	.sw span:nth-child(1){
 	position: absolute;
 	left:7px;
-	bottom: 3px;
-	font-size: 12px;
-	display: block;
+	bottom: 0px;
+	font-size: 18px;
+	display: none;
+	color:white;
+	transition-delay: 2s;
 	}
 	.sw span:nth-child(2){
 		position: absolute;
-		right:6px;
-		bottom: 3px;
-		font-size: 12px;
-		display:block;
+		right:8px;
+		bottom: 0px;
+		font-size: 18px;
+		color:white;
+		transition-delay: 2s;
+		display: block
+	}
+	.switch input:checked + .sw span:nth-child(2){
+		display: none;
+		transition-delay: 2s;
+	}
+		.switch input:checked + .sw span:nth-child(1){
+		display: block;
+		transition-delay: 2s;
 	}
 	.clearboth{
 		clear:both;
@@ -181,6 +193,23 @@
 		background-color: #f1f1f1;
 		color:#333;
 		font-weight: bold;
+	}
+	.ulset li:nth-child(4) a:hover{
+		border-left: 5px solid #00b0f0;
+		transition: all .3s;
+	}
+	.ulset1{
+		list-style: none;
+		padding: 0px;
+		display: none;
+	}
+	.linkli{
+		width: 190px !important;
+		display: inline-block !important;
+	}
+	.ulset1 li a:hover{
+		border-left:5px solid #00b0f0;
+		transition: all .3s;
 	}
 	.setdiv{
 		padding-top: 10px;
@@ -223,10 +252,44 @@
 		border-radius:2px;
 		border:1px solid red;
 	}
+	.whinput{
+		width: 250px;
+		height: 30px;
+	}
+	 .ddspan1{
+		float:right;
+		cursor: pointer;
+		padding: 20px 8px;
+	}
+	.ddspan1:hover{
+		color: #00b0f0;
+	}
 </style>
+  <script type="text/javascript">
+    $(function(){
+      $(".ddspan").click(function(){
+        if ( $(this).attr("rel") == "1" )
+        {
+            $(".navsubmenu1").toggle();
+          }
+          else if ( $(this).attr("rel") == "2" ){
+            $(".navsubmenu").toggle();
+          }
+          else{
+            $(".navsubmenu2").toggle();
+          }
+
+            $(this).children("i").toggle();
+      });
+      $('.ddspan1').click(function(){
+      	$(this).find("i").hasClass("fa-plus") ? $(this).find("i").removeClass("fa-plus").addClass("fa-minus")  : $(this).find("i").removeClass("fa-minus").addClass("fa-plus");
+      	$(".ulset1").toggle();
+      	// $(this).parents("li").css("background-color","green");
+      });
+      });
+      </script>
 </head>
 <body>
-<div style="height: 100px; width: 100%;background-color: blue;"></div>
 <div class="maindiv">
 <ul class="navmenu">
         <li><a href="#" class="ddlink"><i class="fa fa-user-o fa-lg"></i> MY ACCOUNT</a><span class="ddspan" rel="1" ><i class="fa fa-angle-right fa-lg"></i><i class="fa fa-angle-down fa-lg" style="display:none"></i></span><div class="border-bar"></div></li>
@@ -268,7 +331,12 @@
 				<li><a href="#">General settings</a></li>
 				<li><a href="#">Manage markets</a></li>
 				<li><a href="#">Manage alarms</a></li>
-				<li><a href="#">Manage hedge <br>reporting linked</a></li>
+				<li><a href="#" class="linkli">Manage hedge <br>reporting linked</a><span class="ddspan1"><i class="fa fa-plus"></i></span>
+				<ul class="ulset1">
+					<li><a href="#">Manage consolidated <br>hedge reporting linked</a></li>
+					<li><a href="#">Manage topconsolidated<br>hedge reporting linked</a></li>
+				</ul>
+				</li>
 				<li><a href="#">Manage scoring linked</a></li>
 				<li><a href="#">Manage library linked</a></li>
 				<li><a href="#">Manage content</a></li>
@@ -279,11 +347,11 @@
 			<form>
 				<div class="clearboth">
 					<label class="slist">energy cockpit name :</label>
-					<input type="text" name="cname">
+					<input type="text" name="cname" class='whinput'>
 				</div>
 				<div class="clearboth">
 					<label class="slist">created on :</label>
-					<input type="datetime-local" name="cdate">
+					<input type="text" name="cdate"  class='whinput'>
 				</div>
 				<div class="clearboth">
 					<label class="slist"># of users attached :</label>
@@ -293,14 +361,14 @@
 					<label class="slist">emp news included :</label>
 					<label class="switch">
 						<input type="checkbox" name="switchme">
-							<div class="sw"><span>ON</span><span>OFF</span></div>
+							<div class="sw"><span><i class="fa fa-check"></i></span><span><i class="fa fa-times"></i></span></div>
 					</label>
 				</div>
 				<div class="clearboth">
 					<label class="slist">send automatically :</label>
 					<label class="switch">
 						<input type="checkbox" name="switchme">
-							<div class="sw"><span>ON</span><span>OFF</span></div>
+							<div class="sw"><span><i class="fa fa-check"></i></span><span><i class="fa fa-times"></i></span></div>
 					</label>
 				</div>
 				<div class="clearboth">
@@ -310,17 +378,17 @@
 					<div style="display: inline-block;">
 						<input type="radio" name="aa"><label>Default : [FIRSTNAME], here's your energy market report</label><br>
 						<input type="radio" name="aa"><label>Custom email subject line</label><br>
-						<input type="text" name="emailsub" style="margin-left: 40px; width: 90%;"><br>
+						<input type="text" name="emailsub" style="margin-left: 40px; width: 90%; height: 30px;"><br>
 						<span style="margin-left: 40px; font-size: 12px; color:#aaa">Remember to keep your subject line relevant and non-spammy to avoid SPAM filters.</span>
 					</div>
 				</div>
 				<div class="clearboth">
 					<label class="slist">from email address :</label>
-					<input type="email" name="email" placeholder="info@address.com">
+					<input type="email" name="email" placeholder="info@address.com"  class='whinput'>
 				</div>
 				<div class="clearboth">
 				<label class="slist">frequency :</label>
-				<select>
+				<select style="height: 30px;">
 					<option>Daily</option>
 					<option>Weekly</option>
 					<option>&nbsp;&nbsp;&nbsp;-Monday</option>

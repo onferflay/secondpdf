@@ -45,8 +45,8 @@
         font-size: 17px;
         padding-left: 15px;
         line-height: 0;
-      color: white;
-      font-size: 14px;
+      	color: white;
+      	font-size: 14px;
         }
     .ddspan{
       float:right;
@@ -264,6 +264,115 @@
 	.ddspan1:hover{
 		color: #00b0f0;
 	}
+	.generalset>ul{
+		list-style: none;
+		padding: 0px;
+	}
+	.generalset>ul li{
+		display: inline-block;
+		background-color:#f0f6fc;
+	}
+	.generalset>ul li:hover a:hover{
+		background-color:white;
+		border-top: 5px solid #00b0f0;
+		color:#00b0f0;
+	}
+	.generalset>ul li a{
+		border-top: 5px solid #f0f6fc;
+		display: block;
+		padding:15px 80px;
+		text-decoration: none;
+		color:#333;
+		font-weight: bold;
+	}
+	.delmarketspan{
+		float:right;
+		padding: 2px 4px;
+		font-size: 16px;
+		cursor: pointer;
+	}
+
+	    .buttonwithplus{
+    	font-family: "Montserratregular";
+      color: white;
+      padding: 11px 15px;
+      background-color: #00b0f0;
+      border:1px solid #00b0f0;
+      border-radius: 3px;
+    }
+    .buttonwithplus i{
+      color: #00b0f0;
+      padding: 3px 4px;
+      background-color: white;
+      margin-right: 15px;
+      border-radius: 50%;
+      font-size: 10px;
+    }
+    .marketnamespan{
+    border: 1px solid #ccc;
+    padding: 8px 20px;
+    display: block;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #AAA;
+    }
+        .regular-checkbox{
+  -webkit-appearance: none;
+  background-color: white;
+  border:1px solid #cbd6e2;
+  padding: 10px;
+  border-radius: 3px;
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+
+.regular-checkbox:active, .regular-checkbox:focus{
+    box-shadow: 0px 0px 7px #00b0f0;
+    border:1px solid #00b0f0;
+}
+
+.regular-checkbox:checked {
+  background-color: #00b0f0;
+  border:1px solid #00b0f0;
+  color: white;
+}
+.regular-checkbox:focus{
+  outline:0 !important;
+  outline-offset: 0 !important;
+}
+.regular-checkbox:checked:after {
+  font:normal normal normal 14px/1 FontAwesome;
+  content: '\f00c';
+  font-size: 15px;
+  position: absolute;
+  top: 3px;
+  left: 2px;
+  color: white;
+}
+.marketstableul{
+	list-style: none;
+	padding: 0;
+}
+.marketstableul .delmarketspan{
+	position: relative;
+	top: 9px;
+}
+.marketstableul .regular-checkbox{
+	position: relative;
+	top: 4px;
+	margin-right: 20px;
+}
+.marketstableul li{
+	padding:5px 20px;
+}
+.marketstableul li:nth-child(1){
+	padding: 0px;
+}
+#selnr,#delnr{
+	display: block;
+	padding:5px 15px;
+}
 </style>
   <script type="text/javascript">
     $(function(){
@@ -281,16 +390,28 @@
 
             $(this).children("i").toggle();
       });
+
+      $('input[name=allin]').click(function(){
+      	if ( $(this).is(':checked') ){
+      	$(this).parents("ul").find("input").prop('checked',true);
+      }
+      else
+      {
+      	$(this).parents("ul").find("input").prop('checked',false);
+      }
+      var n = $('.marketstableul input:checked').length - $('input:checked[name=allin]').length;
+      $("#selnr").text(n + (n == 1 ? " item" : " items") + " selected");
+      });
+
       $('.ddspan1').click(function(){
       	$(this).find("i").hasClass("fa-plus") ? $(this).find("i").removeClass("fa-plus").addClass("fa-minus")  : $(this).find("i").removeClass("fa-minus").addClass("fa-plus");
       	$(".ulset1").toggle();
-      	// $(this).parents("li").css("background-color","green");
       });
       });
       </script>
 </head>
 <body>
-<div class="maindiv">
+<div class="maindiv" style="width: 1330px">
 <ul class="navmenu">
         <li><a href="#" class="ddlink"><i class="fa fa-user-o fa-lg"></i> MY ACCOUNT</a><span class="ddspan" rel="1" ><i class="fa fa-angle-right fa-lg"></i><i class="fa fa-angle-down fa-lg" style="display:none"></i></span><div class="border-bar"></div></li>
 
@@ -320,7 +441,7 @@
         <li><a href="#"><i class="fa fa-phone fa-lg"></i>CONTACT</a></li>
       </ul>
 <div style="display:flex; flex:1; flex-direction: column; margin-left: 40px; padding-top: 40px;">
-	<div style="width: 55%; height: 60px;">
+	<div style="width: 100%; height: 60px;">
 		<span style="margin-left: 20px; font-size: 20px;">Edit Daily_LivePrice Cockpit</span>
 		<button class="delcockpit">Delete cockpit</button>
 	</div>
@@ -343,68 +464,78 @@
 			</ul>
 		</div>
 		<div class="generalset">
-			<span style="font-size: 20px; font-weight: bold; padding: 20px 40px; display: block;">General settings</span>
-			<form>
-				<div class="clearboth">
-					<label class="slist">energy cockpit name :</label>
-					<input type="text" name="cname" class='whinput'>
-				</div>
-				<div class="clearboth">
-					<label class="slist">created on :</label>
-					<input type="text" name="cdate"  class='whinput'>
-				</div>
-				<div class="clearboth">
-					<label class="slist"># of users attached :</label>
-					<span>25</span>
-				</div>
-				<div class="clearboth">
-					<label class="slist">emp news included :</label>
-					<label class="switch">
-						<input type="checkbox" name="switchme">
-							<div class="sw"><span><i class="fa fa-check"></i></span><span><i class="fa fa-times"></i></span></div>
-					</label>
-				</div>
-				<div class="clearboth">
-					<label class="slist">send automatically :</label>
-					<label class="switch">
-						<input type="checkbox" name="switchme">
-							<div class="sw"><span><i class="fa fa-check"></i></span><span><i class="fa fa-times"></i></span></div>
-					</label>
-				</div>
-				<div class="clearboth">
-					<div style="display: inline-block; position: relative; top:-78px;">
-						<label class="slist">email subject line :</label>
-					</div>
-					<div style="display: inline-block;">
-						<input type="radio" name="aa"><label>Default : [FIRSTNAME], here's your energy market report</label><br>
-						<input type="radio" name="aa"><label>Custom email subject line</label><br>
-						<input type="text" name="emailsub" style="margin-left: 40px; width: 90%; height: 30px;"><br>
-						<span style="margin-left: 40px; font-size: 12px; color:#aaa">Remember to keep your subject line relevant and non-spammy to avoid SPAM filters.</span>
-					</div>
-				</div>
-				<div class="clearboth">
-					<label class="slist">from email address :</label>
-					<input type="email" name="email" placeholder="info@address.com"  class='whinput'>
-				</div>
-				<div class="clearboth">
-				<label class="slist">frequency :</label>
-				<select style="height: 30px;">
-					<option>Daily</option>
-					<option>Weekly</option>
-					<option>&nbsp;&nbsp;&nbsp;-Monday</option>
-					<option>&nbsp;&nbsp;&nbsp;-Tuesday</option>
-					<option>&nbsp;&nbsp;&nbsp;-Wednesday</option>
-					<option>&nbsp;&nbsp;&nbsp;-Thursday</option>
-					<option>&nbsp;&nbsp;&nbsp;-Friday</option>
-					<option>Biweekly</option>
-				</select>
-				</div>
-				<div class="clearboth" style="margin-left: 10%;">
-				<button class="saveset">Save settings</button>
-				<button class="cancelset">Cancel</button>
-				</div>
-			</form>
-		</div>
+		<ul>
+			<li><a href='#'>CHARTS</a></li>
+			<li><a href='#'>TABLES</a></li>
+		</ul>
+<div class="row col-sm-12">
+          <div class="col-sm-4" style="padding-top: 20px;">           
+            <ul style="list-style: none; padding: 0;">
+              <li><span class="marketnamespan">Brent <i class="fa fa-trash-o delmarketspan"></i></span></li>
+              <li style="padding: 5px 20px;">Brent M+1 <i class="fa fa-trash-o delmarketspan"></i></li>
+              <li style="padding: 5px 20px;">Daniel A+1 <i class="fa fa-trash-o delmarketspan"></i></li>
+            </ul>
+          </div>
+          <div class="col-sm-4" style="padding-top: 20px;">           
+            <ul style="list-style: none; padding: 0;">
+              <li><span class="marketnamespan">EUR/USD <i class="fa fa-trash-o delmarketspan"></i></span></li>
+              <li style="padding: 5px 20px;">Rate EUR/USD<i class="fa fa-trash-o delmarketspan"></i></li>
+            </ul>
+          </div>
+          <div class="col-sm-4" style="padding-top: 20px;">           
+            <ul style="list-style: none; padding: 0;">
+              <li><span class="marketnamespan">Natural Gas Spot<i class="fa fa-trash-o delmarketspan"></i></span></li>
+              <li style="padding: 5px 20px;">TTF spot<i class="fa fa-trash-o delmarketspan"></i></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row col-sm-12">
+          <div class="col-sm-4" style="padding-top: 20px;">           
+            <ul style="list-style: none; padding: 0;">
+              <li><span class="marketnamespan">Brent <i class="fa fa-trash-o delmarketspan"></i></span></li>
+              <li style="padding: 5px 20px;">Brent M+1 <i class="fa fa-trash-o delmarketspan"></i></li>
+              <li style="padding: 5px 20px;">Daniel A+1 <i class="fa fa-trash-o delmarketspan"></i></li>
+            </ul>
+          </div>
+          <div class="col-sm-4" style="padding-top: 20px;">           
+            <ul style="list-style: none; padding: 0;">
+              <li><span class="marketnamespan">EUR/USD <i class="fa fa-trash-o delmarketspan"></i></span></li>
+              <li style="padding: 5px 20px;">Rate EUR/USD<i class="fa fa-trash-o delmarketspan"></i></li>
+            </ul>
+          </div>
+          <div class="col-sm-4" style="padding-top: 20px;">           
+            <ul style="list-style: none; padding: 0;">
+              <li><span class="marketnamespan">Natural Gas Spot<i class="fa fa-trash-o delmarketspan"></i></span></li>
+              <li style="padding: 5px 20px;">TTF spot<i class="fa fa-trash-o delmarketspan"></i></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row col-sm-12">
+          <div class="col-sm-4" style="padding-top: 20px;">           
+            <ul style="list-style: none; padding: 0;">
+              <li><span class="marketnamespan">Brent <i class="fa fa-trash-o delmarketspan"></i></span></li>
+              <li style="padding: 5px 20px;">Brent M+1 <i class="fa fa-trash-o delmarketspan"></i></li>
+              <li style="padding: 5px 20px;">Daniel A+1 <i class="fa fa-trash-o delmarketspan"></i></li>
+            </ul>
+          </div>
+          <div class="col-sm-4" style="padding-top: 20px;">           
+            <ul style="list-style: none; padding: 0;">
+              <li><span class="marketnamespan">EUR/USD <i class="fa fa-trash-o delmarketspan"></i></span></li>
+              <li style="padding: 5px 20px;">Rate EUR/USD<i class="fa fa-trash-o delmarketspan"></i></li>
+            </ul>
+          </div>
+          <div class="col-sm-4" style="padding-top: 20px;">           
+            <ul style="list-style: none; padding: 0;">
+              <li><span class="marketnamespan">Natural Gas Spot<i class="fa fa-trash-o delmarketspan"></i></span></li>
+              <li style="padding: 5px 20px;">TTF spot<i class="fa fa-trash-o delmarketspan"></i></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row col-sm-12" style="padding:40px 0 0 40px;">
+          <button class="buttonwithplus"><i class="fa fa-plus"></i>Add market prices</button>
+        </div>
 	</div>
       </div>
 </body>
